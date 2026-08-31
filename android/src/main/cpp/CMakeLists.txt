@@ -18,6 +18,12 @@ set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--gc-sections")
 
 add_library(Native SHARED ${SOURCES})
 
+set_target_properties(
+    Native
+    PROPERTIES
+    LINK_FLAGS "-Wl,-z,max-page-size=16384 -Wl,-z,common-page-size=16384"
+)
+
 find_library(log-lib log)
 
 add_library(onnxruntime SHARED IMPORTED)
